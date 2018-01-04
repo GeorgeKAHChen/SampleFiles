@@ -118,27 +118,22 @@ def BuildFile(FileName):
 def BuildFolder(FolderName):
 	import os
 	if not os.path.exists(FolderName):
-		if SystemJudge() == 0:
-			os.system("mkdir /" + str(FolderName))
-		else:
-			#Not completed for windows
-			LogWrite("Not completed for windows, please build the folder by hand.", '0')
-			print("Not completed for windows, please build the folder with name: " + FolderName)
-			#os.system("copy null " + str(FolderName))
+		os.system("mkdir " + str(FolderName))
 	Str = FolderName + 'build succeed'
 	LogWrite(Str, '0')
 
 
 def MoveFile(FileLocation, NewLocation, NewName):
 	import os
-	if Init.SystemJudge() == 0:
-		os.system("cp " + FileLocation + " " + NewLocation + "/" + NewName)
+	if SystemJudge() == 0:
+		os.system("mv " + FileLocation + " " + NewLocation + "/" + NewName)
 	else:
-		os.system("copy " + FileLocation + " " + NewLocation + "/" + NewName)
+		os.system("move " + FileLocation + " " + NewLocation + "/" + NewName)
 	return
 
 
 def StaClear():
+	import os
 	if SystemJudge() == 0:
 		os.system("clear")
 	else:
