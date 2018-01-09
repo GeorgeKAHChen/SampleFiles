@@ -1,0 +1,67 @@
+%Terminal Command = xelatex -pdf FileName
+%This is model of LaTeX for Chinese and Japanese
+%KazukiAmakawa
+%Pretreatment========================================================================================
+\documentclass[UTF8]{ctexart}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{geometry}
+\usepackage{lingmacros}
+\usepackage{tree-dvips}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings} 
+\usepackage{amssymb}
+\usepackage{verbatim}
+
+\geometry{left=2cm,right=2cm,top=2.4cm,bottom=2.2cm}
+\title{Title}
+\author{\textbf{Kazuki Amakawa}}
+\date{\today}
+
+%Title================================================================================================
+\begin{document}
+\maketitle
+\noindent \textbf{介绍}\\
+紹介\\
+
+\noindent \textbf{关键词:} \\[20ex]
+\thispagestyle{empty}
+\newpage
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+%Main=================================================================================================
+%Section 1=================================================================================================
+\setcounter{page}{1}
+\newpage
+\section{紹介}
+紹介の内容
+
+%Section 2=================================================================================================
+\newpage
+\section{RWIEA算法数学原理}
+\subsection{RWIEA算法数学原理 - 迭代概率法数学原理}
+\subsubsection{随机游走分类}
+随机游走分类，实际上是一种半监督学习，并不需要知道所有数据（结点）的标签，而只需要知道部分结点的标签，及结点之间的关系即可。\\
+
+%Reference============================================================================================
+\newpage
+\medskip
+\begin{thebibliography}{9}
+\bibitem{Toboggan}
+J. Fairfield, "Toboggan contrast enhancement for contrast segmentation," [1990] Proceedings. 10th International Conference on Pattern Recognition, Atlantic City, NJ, 1990, pp. 712-716 vol.1. doi: 10.1109/ICPR.1990.118200
+
+\bibitem{MCMC}
+Markov chain Monte Carlo - From Wikipedia, the free encyclopedia
+\\\texttt{$https://en.wikipedia.org/wiki/Markov\_chain\_Monte\_Carlo$}
+
+
+\end{thebibliography}
+
+\noindent 代码：\texttt{$$}\\
+\end{document}
+
+
+
