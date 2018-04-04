@@ -43,24 +43,58 @@ def GetFiles():
 
 def AutoLaTeX():
 	import os
+	Name = GetFiles()
 	for i in range(0, len(Name)):
 		try:
-			os.system("xelatex -pdf " + Name[i] + ".tex")
+			os.system("xelatex " + Name[i] + ".tex")
 		except:
 			continue
 		try:
-			os.system("bibtex -pdf " + Name[i] + ".aux")
+			os.system("bibtex " + Name[i] + ".aux")
 		except:
 			continue
 		try:
-			os.system("xelatex -pdf " + Name[i] + ".tex")
+			os.system("xelatex " + Name[i] + ".tex")
 		except:
 			continue	
 		try:	
-			os.system("xelatex -pdf " + Name[i] + ".tex")
+			os.system("xelatex " + Name[i] + ".tex")
 		except:
 			continue		
+		try:
+			os.system("rm " + Name[i] + ".aux")
+		except:
+			pass
+		try:
+			os.system("rm " + Name[i] + ".bbl")
+		except:
+			pass
+		try:
+			os.system("rm " + Name[i] + ".blg")
+		except:
+			pass
+		try:
+			os.system("rm " + Name[i] + ".log")
+		except:
+			pass
+		try:
+			os.system("rm " + Name[i] + ".out")
+		except:
+			pass
+		try:
+			os.system("rm " + Name[i] + ".toc")
+		except:
+			pass
+		try:
+			os.system("rm " + Name[i] + ".toc")
+		except:
+			pass
+		try:
+			os.system("rm " + Name[i] + ".thm")
+		except:
+			pass
 		os.system("clear")
 		print("Latex File " + Name[i] + " Compile Succeed!!")
+
 
 AutoLaTeX()

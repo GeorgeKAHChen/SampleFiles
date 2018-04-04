@@ -14,6 +14,21 @@
 \usepackage{listings} 
 \usepackage{amssymb}
 \usepackage{verbatim}
+\usepackage{cite}
+\usepackage[amsmath,thmmarks]{ntheorem}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{subfigure}
+\usepackage{appendix}  
+
+\theoremstyle{plain}
+\theoremheaderfont{\normalfont\rmfamily\CJKfamily{hei}}
+\theorembodyfont{\normalfont\rm\CJKfamily{kai}} \theoremindent0em
+\theoremseparator{\hspace{1em}} \theoremnumbering{arabic}
+\theoremsymbol{}
+\newtheorem{theorem}{\textbf{定理}}[section]
+\newtheorem{definition}{\textbf{定义}}[section]
+\newtheorem{lemma}{\textbf{引理}}[section]
 
 \geometry{left=2cm,right=2cm,top=2.4cm,bottom=2.2cm}
 \title{Title}
@@ -39,29 +54,68 @@
 \section{紹介}
 紹介の内容
 
-%Section 2=================================================================================================
-\newpage
-\section{RWIEA算法数学原理}
-\subsection{RWIEA算法数学原理 - 迭代概率法数学原理}
-\subsubsection{随机游走分类}
-随机游走分类，实际上是一种半监督学习，并不需要知道所有数据（结点）的标签，而只需要知道部分结点的标签，及结点之间的关系即可。\\
+
 
 %Reference============================================================================================
 \newpage
 \medskip
-\begin{thebibliography}{9}
-\bibitem{Toboggan}
-J. Fairfield, "Toboggan contrast enhancement for contrast segmentation," [1990] Proceedings. 10th International Conference on Pattern Recognition, Atlantic City, NJ, 1990, pp. 712-716 vol.1. doi: 10.1109/ICPR.1990.118200
-
-\bibitem{MCMC}
-Markov chain Monte Carlo - From Wikipedia, the free encyclopedia
-\\\texttt{$https://en.wikipedia.org/wiki/Markov\_chain\_Monte\_Carlo$}
-
-
-\end{thebibliography}
+\bibliographystyle{plain}
+\bibliography{/Users/kazukiamakawa/Desktop/お仕事関連/Paper/KazukiAmakawa.bib}
 
 \noindent 代码：\texttt{$$}\\
 \end{document}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
+%Sample Codes
+\begin{definition}
+除环\\
+对于一个集合$G$和两种二元运算：加法$+$和乘法 $\cdot$ ，如果$(G, +, \cdot)$为一个环，且\\
+1) 对于任意一个非零元素，均存在它的逆元，即$\forall a \neq e \in G, \exists a^{-1} \in G\ s.t.\ a \cdot a^{-1} = 0$\\
+则称$(G, +, \cdot)$为一个除环\\
+\end{definition}
+
+
+\begin{table}[!htb]
+\centering  
+\caption{传统代数与抽象代数的区别}  
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+传统代数 & 数   & $+, \cdot$ & 0,1   & 相反数，倒数\\
+\hline
+抽象代数 & 集合 & 二元运算     & 单位元 & 逆元 \\  
+\hline
+\end{tabular}  
+\end{table}  
+
+
+\noindent\rule[0.25\baselineskip]{\textwidth}{1pt}
+\begin{lstlisting}[language = Matlab][basicstyle=\ttfamily][!htb]
+[Code: Matlab]
+clear
+[number, txt, raw] = xlsread('File');
+\end{lstlisting} 
+\noindent\rule[0.25\baselineskip]{\textwidth}{1pt}
+
+
+\begin{figure}[!htb]
+\begin{center}
+\includegraphics[width=1.00\textwidth]{Figure/MLResult.png} \\
+图3 CARLA算法的迭代情况\\
+\end{center}
+\end{figure}
+
+
+\begin{algorithm}[!htb]
+\caption{CARLA algorithm main steps}
+\begin{algorithmic}
+1)
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{flalign}
+& & \nonumber\\
+& & \nonumber
+\end{flalign}
