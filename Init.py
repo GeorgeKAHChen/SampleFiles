@@ -89,7 +89,7 @@ SystemJudge()
 def LogWrite(LogStr, kind):
 	import os
 	import time 
-	FileName = "CRIEA.log"
+	FileName = "CARLA.log"
 		
 	File = open(FileName, "a")
 	Ima = time.ctime()
@@ -274,16 +274,27 @@ def GetTime():
 	return ReturnTime
 
 
-def ArrOutput(Arr):
+def ArrOutput(Arr, Mode = 0):
 	FileName = "SaveArr" + str(GetTime())
 	BuildFile(FileName)
 	File = open(FileName, "a")
 	Str = ""
+	if Mode == 1:
+		Str += "[["
 	for i in range(0, len(Arr)):
 		for j in range(0, len(Arr[i])):
 			Str += str(Arr[i][j])
-			Str += "\t"
-		Str += "\n"
+			if Mode == 0:
+				Str += "\t"
+			elif Mode == 1 and j != len(Arr[i]) - 1:
+				Str += ", "
+		if Mode == 0:
+			Str += "\n"
+		elif Mode == 1:
+			if i != len(Arr) - 1:
+				Str += "], ["
+			else:
+				Str += "]]"
 	File.write(Str)
 	File.close()
 
