@@ -4,8 +4,8 @@ Here are some sample files for project.<br/>
 ## Python_Init
 This program include some main algorithm which is useful in python program and image processing.<br/>
 
-Init.py
-Include some basic fucntion of python program
+### `Init.py`
+Include some basic fucntion of python program<br/>
 
 `LogWrite(LogStr, kind)`: This function will write the infomation into the log file.<br/>
 `BuildFile(FileName)`: This function will build a new file with FileName<br/>
@@ -19,3 +19,22 @@ Include some basic fucntion of python program
 `ArrOutput(Arr)`: This function will save the array as a table.<br/>
 `GetNextDay(Time, TimeAdd)`: This function will calculated the next day by the calendar<br/>
 `SystemJudge()`: This function will return the system infomation<br/>
+
+
+### `Pretreatment.py`
+
+### `InitAlgo.py`
+
+## LaTeX
+
+### `Chinese.tex`
+
+### `English.tex`
+
+### `Presentation.tex`
+
+### `Sample.tex`
+
+## `ginignore`
+
+## `Tool.sh`
