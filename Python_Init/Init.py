@@ -78,11 +78,20 @@ GetNextDay(Time, TimeAdd)
 
 	return Time+TimeAdd
 
+
 SystemJudge()
 	This function will return the system infomation
 
 	return 0 means this system is not windows system
 		   1 means this system is windows system
+
+
+FigureInput()
+	This function will get all images in the folder "Saving"
+
+	return [Figure, Name]
+		Figure is the abstract location for all images
+		Name is the name for every image
 """
 
 
@@ -385,7 +394,7 @@ def FigureInput():
 		print("No Figure")
 		return [], []
 
-	print("FileLise: ")
+	print("FileList: ")
 	for i in range(0, len(Figure)):
 		print(str(i+1) + "\t" + Name[i])
 	
