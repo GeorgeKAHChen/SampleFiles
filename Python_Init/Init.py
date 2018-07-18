@@ -338,12 +338,58 @@ def SystemJudge():
 	import platform  
 	Str = platform.system() 
 	if Str[0] == "w" or Str[0] == "W":
-		return 1
+		return "Dos"
+	elif Str == "Darwin": 
+		return "MacOS"
 	else:
-		return 0
+		return "Linux"
 
 
+def FigureInput(model):
+	Figure = []
+	Name = []
+	root0 = ""
+	for root, dirs, files in os.walk(os.getcwd()):
+		if root0 == "":
+			root0 = root
+			if SystemJudge() == "MacOS" or SystemJudge() == "Linux":
+				root0 += "/Saving"
+			else:
+				root0 += "\\Saving"
+		if model == 1 and root0 == root:
+			continue
+		if model == 2 and root0 != root:
+			continue
 
+		for i in range(0, len(files)):
+			if SystemJudge() == "MacOS" or SystemJudge() == "Linux":
+				LocStr = root + "/" + files[i]
+			else:
+				LocStr = root + "\\" + files[i]
+			Hajimari = 0
+			Last = ""
+
+			for j0 in range(0, len(files[i])):
+				j = len(files[i]) - j0 -1
+				if files[i][j] == ".":
+					break
+				else:
+					Last = files[i][j] + Last
+
+			if Last == "bmp" or Last == "jpg" or Last == "png":
+				Figure.append(LocStr)
+				Name.append(files[i])
+
+	if len(Figure) == 0:
+		print("No Figure")
+		return -1
+
+	print("FileLise: ")
+	for i in range(0, len(Figure)):
+		print(str(i+1) + "\t" + Name[i])
+	
+	Init.LogWrite("Initialization succeed","0")
+	return [Figure, Name]
 
 
 
