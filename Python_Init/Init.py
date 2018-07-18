@@ -345,7 +345,9 @@ def SystemJudge():
 		return "Linux"
 
 
-def FigureInput(model):
+def FigureInput():
+	import os
+
 	Figure = []
 	Name = []
 	root0 = ""
@@ -356,9 +358,8 @@ def FigureInput(model):
 				root0 += "/Saving"
 			else:
 				root0 += "\\Saving"
-		if model == 1 and root0 == root:
-			continue
-		if model == 2 and root0 != root:
+
+		if root0 != root:
 			continue
 
 		for i in range(0, len(files)):
@@ -382,13 +383,12 @@ def FigureInput(model):
 
 	if len(Figure) == 0:
 		print("No Figure")
-		return -1
+		return [], []
 
 	print("FileLise: ")
 	for i in range(0, len(Figure)):
 		print(str(i+1) + "\t" + Name[i])
 	
-	Init.LogWrite("Initialization succeed","0")
 	return [Figure, Name]
 
 
