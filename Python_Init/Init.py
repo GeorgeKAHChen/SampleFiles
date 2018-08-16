@@ -100,6 +100,14 @@ GetSufixFile(dir, sufixSet)
 	sufixSet = [".xxx1", ".xxx2", ...] the sufix files you need
 
 	return Files location you need 
+
+PackageDetection(PackList)
+	This function will print the package which not install
+
+	PackList = ["package_name_1", "package_name_2", ...]
+
+	return True means some packages not installed
+		   False means all packages are installed
 """
 
 
@@ -421,4 +429,32 @@ def GetSufixFile(dir, sufixSet):
 				im_paths.append(im_path)
 
 	return im_paths
+
+
+def PackageDetection(PackList):
+	import os
+
+	FileName = "PackDet.py"
+	File = open(FileName, "w")
+	Str = "def Check():\n\tError = False\n"
+
+	for i in range(0, len(PackList)):
+		Str += "\ttry:\n\t\timport " + PackList[i] + "\n\texcept:\n\t\tprint('Not installed pakage: " + PackList[i] + "')\n\tError = True\n"
+	Str += "\treturn Error"
+	File.write(Str)
+	File.close()
+
+	import PackDet
+	Error = PackDet.Check()
+	os.remove("PackDet.py")
+	
+	return Error
+
+
+
+
+
+
+
+
 
