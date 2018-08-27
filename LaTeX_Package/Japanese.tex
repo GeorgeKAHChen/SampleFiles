@@ -1,0 +1,121 @@
+%Terminal Command = xelatex -pdf FileName
+%This is model of LaTeX for Chinese and Japanese
+%KazukiAmakawa
+%Pretreatment========================================================================================
+\documentclass[UTF8]{ctexart}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{geometry}
+\usepackage{lingmacros}
+\usepackage{tree-dvips}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings} 
+\usepackage{amssymb}
+\usepackage{verbatim}
+\usepackage{cite}
+\usepackage[amsmath,thmmarks]{ntheorem}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{subfigure}
+\usepackage{appendix}  
+
+\theoremstyle{plain}
+\theoremheaderfont{\normalfont\rmfamily\CJKfamily{hei}}
+\theorembodyfont{\normalfont\rm\CJKfamily{kai}} \theoremindent0em
+\theoremseparator{\hspace{1em}} \theoremnumbering{arabic}
+\theoremsymbol{}
+\newtheorem{theorem}{\textbf{定理}}[section]
+\newtheorem{definition}{\textbf{定義}}[section]
+\newtheorem{lemma}{\textbf{レンマ}}[section]
+
+\geometry{left=2cm,right=2cm,top=2.4cm,bottom=2.2cm}
+\title{タイトル}
+\author{\textbf{天川かずき}}
+\date{\today}
+
+%Title================================================================================================
+\begin{document}
+\maketitle
+\noindent \textbf{要旨}\\
+\\
+
+\noindent \textbf{キーワード} \\[20ex]
+\thispagestyle{empty}
+\newpage
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+%Main=================================================================================================
+%Section 1=================================================================================================
+\setcounter{page}{1}
+\newpage
+\section{はじめに}
+紹介の内容
+
+
+
+%Reference============================================================================================
+\newpage
+\medskip
+\bibliographystyle{plain}
+\bibliography{/Users/kazukiamakawa/Desktop/お仕事関連/Paper/KazukiAmakawa.bib}
+
+\noindent コード\texttt{$なし$}\\
+\end{document}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+%Sample Codes
+\begin{definition}
+除环\\
+对于一个集合$G$和两种二元运算：加法$+$和乘法 $\cdot$ ，如果$(G, +, \cdot)$为一个环，且\\
+1) 对于任意一个非零元素，均存在它的逆元，即$\forall a \neq e \in G, \exists a^{-1} \in G\ s.t.\ a \cdot a^{-1} = 0$\\
+则称$(G, +, \cdot)$为一个除环\\
+\end{definition}
+
+
+\begin{table}[!htb]
+\centering  
+\caption{传统代数与抽象代数的区别}  
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+传统代数 & 数   & $+, \cdot$ & 0,1   & 相反数，倒数\\
+\hline
+抽象代数 & 集合 & 二元运算     & 单位元 & 逆元 \\  
+\hline
+\end{tabular}  
+\end{table}  
+
+
+\noindent\rule[0.25\baselineskip]{\textwidth}{1pt}
+\begin{lstlisting}[language = Matlab][basicstyle=\ttfamily][!htb]
+[Code: Matlab]
+clear
+[number, txt, raw] = xlsread('File');
+\end{lstlisting} 
+\noindent\rule[0.25\baselineskip]{\textwidth}{1pt}
+
+
+\begin{figure}[!htb]
+\begin{center}
+\includegraphics[width=1.00\textwidth]{Figure/MLResult.png} \\
+图3 CARLA算法的迭代情况\\
+\end{center}
+\end{figure}
+
+
+\begin{algorithm}[!htb]
+\caption{CARLA algorithm main steps}
+\begin{algorithmic}
+1)
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{flalign}
+& & \nonumber\\
+& & \nonumber
+\end{flalign}
