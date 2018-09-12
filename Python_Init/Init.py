@@ -417,18 +417,20 @@ def FigureInput():
 	return [Figure, Name]
 
 
-def GetSufixFile(dir, sufixSet):
+def GetSufixFile(dir_name, sufixSet):
 	import os
 	im_paths = []
 	for parent, dirs, files in os.walk(dir_name):
 		for file in files:
 			name,sufix = file.split('.')
+			im_path = ""
 			if sufix in sufixSet:
 				im_path = os.path.join(parent,file)
 			if os.path.exists(im_path):
 				im_paths.append(im_path)
 
 	return im_paths
+
 
 
 def PackageDetection(PackList):
