@@ -139,6 +139,7 @@ venv.bak/
 
 #MyFile 
 Output/
+Input/
 Figure/
 SaveArr*
 Saving/
