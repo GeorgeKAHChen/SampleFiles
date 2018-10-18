@@ -420,6 +420,7 @@ def FigureInput():
 def GetSufixFile(dir_name, sufixSet):
 	import os
 	im_paths = []
+	im_name = []
 	for parent, dirs, files in os.walk(dir_name):
 		for file in files:
 			name,sufix = file.split('.')
@@ -428,8 +429,9 @@ def GetSufixFile(dir_name, sufixSet):
 				im_path = os.path.join(parent,file)
 			if os.path.exists(im_path):
 				im_paths.append(im_path)
+				im_name.append(name)
 
-	return im_paths
+	return im_paths, name
 
 
 
