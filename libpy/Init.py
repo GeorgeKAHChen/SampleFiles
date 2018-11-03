@@ -431,7 +431,7 @@ def GetSufixFile(dir_name, sufixSet):
 				im_paths.append(im_path)
 				im_name.append(name)
 
-	return im_paths, name
+	return im_paths, im_name
 
 
 
