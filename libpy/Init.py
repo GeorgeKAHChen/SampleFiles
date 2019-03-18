@@ -132,7 +132,7 @@ def LogWrite(LogStr, kind):
 def BuildFile(FileName):
 	import os
 	if not os.path.exists(FileName):
-		if SystemJudge() == 0:
+		if SystemJudge() == "Darwin" or SystemJudge() == "Linux":
 			os.system("cat /dev/null > " + str(FileName))
 		else:
 			os.system("copy null " + str(FileName))
@@ -365,7 +365,7 @@ def SystemJudge():
 	if Str[0] == "w" or Str[0] == "W":
 		return "Dos"
 	elif Str == "Darwin": 
-		return "MacOS"
+		return "Darwin"
 	else:
 		return "Linux"
 
