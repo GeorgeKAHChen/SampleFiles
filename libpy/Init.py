@@ -114,7 +114,7 @@ PackageDetection(PackList)
 def LogWrite(LogStr, kind):
 	import os
 	import time 
-	FileName = "CARLA.log"
+	FileName = "info.log"
 		
 	File = open(FileName, "a")
 	Ima = time.ctime()
@@ -127,42 +127,6 @@ def LogWrite(LogStr, kind):
 	File.write(WriteStr)
 	File.close()
 	return 0
-
-
-def BuildFile(FileName):
-	import os
-	if not os.path.exists(FileName):
-		if SystemJudge() == "Darwin" or SystemJudge() == "Linux":
-			os.system("cat /dev/null > " + str(FileName))
-		else:
-			os.system("copy null " + str(FileName))
-	Str = FileName + 'build succeed'
-	LogWrite(Str, '0')
-
-
-def BuildFolder(FolderName):
-	import os
-	if not os.path.exists(FolderName):
-		os.system("mkdir " + str(FolderName))
-	Str = FolderName + 'build succeed'
-	LogWrite(Str, '0')
-
-
-def MoveFile(FileLocation, NewLocation, NewName):
-	import os
-	if SystemJudge() == 0:
-		os.system("mv " + FileLocation + " " + NewLocation + "/" + NewName)
-	else:
-		os.system("move " + FileLocation + " " + NewLocation + "/" + NewName)
-	return
-
-
-def StaClear():
-	import os
-	if SystemJudge() == 0:
-		os.system("clear")
-	else:
-		os.system("cls")
 
 
 def IntInput(Str, Min, Max, Method):
@@ -370,53 +334,6 @@ def SystemJudge():
 		return "Linux"
 
 
-def FigureInput():
-	import os
-
-	Figure = []
-	Name = []
-	root0 = ""
-	for root, dirs, files in os.walk(os.getcwd()):
-		if root0 == "":
-			root0 = root
-			if SystemJudge() == "MacOS" or SystemJudge() == "Linux":
-				root0 += "/Saving"
-			else:
-				root0 += "\\Saving"
-
-		if root0 != root:
-			continue
-
-		for i in range(0, len(files)):
-			if SystemJudge() == "MacOS" or SystemJudge() == "Linux":
-				LocStr = root + "/" + files[i]
-			else:
-				LocStr = root + "\\" + files[i]
-			Hajimari = 0
-			Last = ""
-
-			for j0 in range(0, len(files[i])):
-				j = len(files[i]) - j0 -1
-				if files[i][j] == ".":
-					break
-				else:
-					Last = files[i][j] + Last
-
-			if Last == "bmp" or Last == "jpg" or Last == "png":
-				Figure.append(LocStr)
-				Name.append(files[i])
-
-	if len(Figure) == 0:
-		print("No Figure")
-		return [], []
-
-	print("FileList: ")
-	for i in range(0, len(Figure)):
-		print(str(i+1) + "\t" + Name[i])
-	
-	return [Figure, Name]
-
-
 def GetSufixFile(dir_name, sufixSet):
 	import os
 	im_paths = []
@@ -434,28 +351,310 @@ def GetSufixFile(dir_name, sufixSet):
 	return im_paths, im_name
 
 
+def RGBList2Table(InputImage):
+	import numpy as np
+	Size = np.shape(InputImage)
+	if len(Size) != 3:
+		print("InputError: RGBList2Table function need input image with [[[R,G,B] * width] * height] parameter. Your input may RGB tabled image or grey image")
+		return [[[-1]], [[]], [[]]]
+	if Size[2] != 3 and Size[0] == 3:
+		return InputImage
 
-def PackageDetection(PackList):
-	import os
+	RTable = []
+	GTable = []
+	BTable = []
+	for i in range(0, len(InputImage)):
+		RLine = []
+		GLine = []
+		BLine = []
+		for j in range(0, len(InputImage[i])):
+			RLine.append(InputImage[i][j][0])
+			GLine.append(InputImage[i][j][1])
+			BLine.append(InputImage[i][j][2])
+		RTable.append(RLine)
+		GTable.append(GLine)
+		BTable.append(BLine)
+	return np.array([RTable, GTable, BTable])
 
-	FileName = "PackDet.py"
-	File = open(FileName, "w")
-	Str = "def Check():\n\tError = False\n"
 
-	for i in range(0, len(PackList)):
-		Str += "\ttry:\n\t\timport " + PackList[i] + "\n\texcept:\n\t\tprint('Not installed pakage: " + PackList[i] + "')\n\tError = True\n"
-	Str += "\treturn Error"
-	File.write(Str)
-	File.close()
 
-	import PackDet
-	Error = PackDet.Check()
-	os.remove("PackDet.py")
+def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
+	"""
+	This is a image io and print function to combined several backend
+	"""
+	import numpy as np
+
+	opencv_mark	    = False
+	PIL_mark        = False
+	matplotlib_mark = False
+	imageio_mark    = False
+
+
+	if len(backend) == 0:	
+		try:
+			import cv2
+			opencv_mark = True
+		except:
+			try:
+				from PIL import Image
+				PIL_mark = True
+			except:
+				try:
+					import matplotlib
+					matplotlib_mark = True
+				except:
+					try:
+						import imageio
+						imageio_mark = True
+					except:
+						ModuleNotFoundError("None image processing model has been found, you may need to install opencv, PIL, matplotlib or imageio")
 	
-	return Error
+
+	elif backend == "opencv":
+		import cv2
+		opencv_mark = True
+	elif backend == "Pillow":
+		from PIL import Image
+		PIL_mark = True
+	elif backend == "matplotlib":
+		import matplotlib
+		matplotlib_mark = True
+	elif backend == "imageio":
+		import imageio
+		imageio_mark = True
+	else:
+		ModuleNotFoundError("Import package not be support, you may need to use opencv, PIL, matplotlib or imageio")
 
 
 
+
+
+
+
+	if opencv_mark == True:
+		print("Using opencv backend")
+		import cv2
+
+
+
+		if io == "i":
+			if mode == "rgb":
+				img = cv2.imread(file_dir)
+			elif mode == "grey":
+				img = cv2.imread(file_dir, cv2.IMREAD_GRAYSCALE)
+			else:
+				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+			return img
+
+
+
+		elif io == "p":
+			img = np.array(img)
+			img_size = len(np.shape(img))
+			if len(file_dir) == 0 and img_size != 2 and img_size != 3:
+				ValueError("It is necessary to confirmed the location of image or img array if you want to print image")
+			
+			if len(file_dir) != 0:
+				img = cv2.imread(file_dir)
+			
+			if mode == "rgb":
+				cv2.imshow("image", img)
+				cv2.waitKey(1)
+			elif mode == "grey":
+				img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+				cv2.imshow("image". img)
+				cv2.waitKey(1)
+			else:
+				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+			return True
+
+
+
+		elif io == "o":
+			if len(file_dir) == 0:
+				ValueError("file_dir not be confirmed")
+
+			if mode == "rgb":
+				cv2.imwrite(file_dir, img)
+			elif mode == "grey":
+				img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+				cv2.imwrite(file_dir, img)
+			else:
+				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+			return True
+
+		else:
+			ValueError("io error, the io must be confirmed as 'i' for input, 'p' for presentation or 'o' for output")
+
+
+
+
+
+
+
+	elif PIL_mark == True:
+		print("Using Pillow backend")
+		from PIL import Image
+
+
+		if io == "i":
+			if mode == "rgb":
+				img = np.array(Image.open(file_dir))
+			elif mode == "grey":
+				img = np.array(Image.open(file_dir).convert("L"))
+			else:
+				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+			return img
+
+
+
+		elif io == "p":
+			img = np.array(img)
+			img_size = len(np.shape(img))
+			if len(file_dir) == 0 and img_size != 2 and img_size != 3:
+				ValueError("It is necessary to confirmed the location of image or img array if you want to print image")
+			
+			if len(file_dir) != 0:
+				img = Image.open(file_dir)
+			else:
+				img = Image.fromarray(img.astype('uint8'), 'RGB')
+			
+			if mode == "rgb":
+				img.show()
+			elif mode == "grey":
+				img = img.convert("L")
+				img.show()
+			else:
+				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+			return True
+
+
+
+		elif io == "o":
+			if len(file_dir) == 0:
+				ValueError("file_dir not be confirmed")
+
+			img = Image.fromarray(img.astype('uint8'), 'RGB')
+			if mode == "rgb":
+				img.save(file_dir)
+			elif mode == "grey":
+				img = img.convert("L")
+				img.save(file_dir)
+			else:
+				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+			return True
+
+		else:
+			ValueError("io error, the io must be confirmed as 'i' for input, 'p' for presentation or 'o' for output")
+
+
+
+
+
+
+	elif matplotlib_mark == True:
+		print("Using matplotlib backend")
+		import matplotlib
+
+
+		if io == "i":
+			if mode == "rgb":
+				img = np.array(matplotlib.pyplot.imread(file_dir))
+			elif mode == "grey":
+				img = np.array(matplotlib.pyplot.imread(file_dir))
+				img = np.dot(img[...,:3], [0.299, 0.587, 0.144])
+			else:
+				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+			return img
+
+
+
+		elif io == "p":
+			img = np.array(img)
+			img_size = len(np.shape(img))
+			if len(file_dir) == 0 and img_size != 2 and img_size != 3:
+				ValueError("It is necessary to confirmed the location of image or img array if you want to print image")
+			
+			if len(file_dir) != 0:
+				img = np.array(matplotlib.pyplot.imread(file_dir))
+			
+			if mode == "rgb":
+				matplotlib.pyplot.imshow(img)
+			elif mode == "grey":
+				img = np.dot(img[...,:3], [0.299, 0.587, 0.144])
+				matplotlib.pyplot.imshow(img)
+			else:
+				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+			return True
+
+
+
+		elif io == "o":
+			if len(file_dir) == 0:
+				ValueError("file_dir not be confirmed")
+
+			img = Image.fromarray(img.astype('uint8'), 'RGB')
+			if mode == "rgb":
+				matplotlib.pyplot.savefig(img)
+			elif mode == "grey":
+				img = np.dot(img[...,:3], [0.299, 0.587, 0.144])
+				matplotlib.pyplot.savefig(img)
+			else:
+				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+			return True
+
+		else:
+			ValueError("io error, the io must be confirmed as 'i' for input, 'p' for presentation or 'o' for output")
+
+
+
+
+
+
+
+
+
+
+
+	elif imageio_mark == True:
+		print("Using imageio backend")
+		import imageio
+		if io == "i":
+			if mode == "rgb":
+				img = np.array(imageio.imread(file_dir))
+			elif mode == "grey":
+				img = np.array(imageio.imread(file_dir))
+				img = np.dot(img[...,:3], [0.299, 0.587, 0.144])
+			else:
+				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+			return img
+
+
+
+		elif io == "p":
+			ValueError("mode error, imageio don't have image presentation system")
+			return True
+
+
+
+		elif io == "o":
+			if len(file_dir) == 0:
+				ValueError("file_dir not be confirmed")
+
+			if mode == "rgb":
+				imageio.imwrite(file_dir, img)
+			elif mode == "grey":
+				img = np.dot(img[...,:3], [0.299, 0.587, 0.144])
+				imageio.imwrite(file_dir, img)
+			else:
+				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+			return True
+
+		else:
+			ValueError("io error, the io must be confirmed as 'i' for input, 'p' for presentation or 'o' for output")
+
+	else:
+		ModuleNotFoundError("None image processing model has been found, you may need to install opencv, PIL, matplotlib or imageio")
 
 
 
