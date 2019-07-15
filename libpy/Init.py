@@ -340,6 +340,7 @@ def GetSufixFile(dir_name, sufixSet):
 	im_name = []
 	for parent, dirs, files in os.walk(dir_name):
 		for file in files:
+			print(file)
 			name,sufix = file.split('.')
 			im_path = ""
 			if sufix in sufixSet:
@@ -407,23 +408,36 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 						import imageio
 						imageio_mark = True
 					except:
-						ModuleNotFoundError("None image processing model has been found, you may need to install opencv, PIL, matplotlib or imageio")
-	
+						raise ModuleNotFoundError("None image processing model has been found, you may need to install opencv, PIL, matplotlib or imageio")
+
 
 	elif backend == "opencv":
-		import cv2
+		try:
+			import cv2
+		except:
+			raise ModuleNotFoundError("Opencv backend has not been installed")
 		opencv_mark = True
 	elif backend == "Pillow":
-		from PIL import Image
+		try:
+			from PIL import Image
+		except:
+			raise ModuleNotFoundError("Pillow backend has not been installed")
+			
 		PIL_mark = True
 	elif backend == "matplotlib":
-		import matplotlib
+		try:
+			import matplotlib
+		except:
+			raise ModuleNotFoundError("Matplotlib backend has not been installed")
 		matplotlib_mark = True
 	elif backend == "imageio":
-		import imageio
+		try:
+			import imageio
+		except:
+			raise ModuleNotFoundError("Matplotlib backend has not been installed")
 		imageio_mark = True
 	else:
-		ModuleNotFoundError("Import package not be support, you may need to use opencv, PIL, matplotlib or imageio")
+		raise ModuleNotFoundError("Import package not be support, you may need to use opencv, PIL, matplotlib or imageio")
 
 
 
@@ -443,7 +457,7 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 			elif mode == "grey":
 				img = cv2.imread(file_dir, cv2.IMREAD_GRAYSCALE)
 			else:
-				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+				raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
 			return img
 
 
@@ -452,7 +466,7 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 			img = np.array(img)
 			img_size = len(np.shape(img))
 			if len(file_dir) == 0 and img_size != 2 and img_size != 3:
-				ValueError("It is necessary to confirmed the location of image or img array if you want to print image")
+				raise ValueError("It is necessary to confirmed the location of image or img array if you want to print image")
 			
 			if len(file_dir) != 0:
 				img = cv2.imread(file_dir)
@@ -465,14 +479,14 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 				cv2.imshow("image". img)
 				cv2.waitKey(1)
 			else:
-				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+				raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
 			return True
 
 
 
 		elif io == "o":
 			if len(file_dir) == 0:
-				ValueError("file_dir not be confirmed")
+				raise ValueError("file_dir not be confirmed")
 
 			if mode == "rgb":
 				cv2.imwrite(file_dir, img)
@@ -480,11 +494,11 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 				img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 				cv2.imwrite(file_dir, img)
 			else:
-				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+				raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
 			return True
 
 		else:
-			ValueError("io error, the io must be confirmed as 'i' for input, 'p' for presentation or 'o' for output")
+			raise ValueError("io error, the io must be confirmed as 'i' for input, 'p' for presentation or 'o' for output")
 
 
 
@@ -503,7 +517,7 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 			elif mode == "grey":
 				img = np.array(Image.open(file_dir).convert("L"))
 			else:
-				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+				raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
 			return img
 
 
@@ -512,7 +526,7 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 			img = np.array(img)
 			img_size = len(np.shape(img))
 			if len(file_dir) == 0 and img_size != 2 and img_size != 3:
-				ValueError("It is necessary to confirmed the location of image or img array if you want to print image")
+				raise ValueError("It is necessary to confirmed the location of image or img array if you want to print image")
 			
 			if len(file_dir) != 0:
 				img = Image.open(file_dir)
@@ -525,14 +539,14 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 				img = img.convert("L")
 				img.show()
 			else:
-				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+				raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
 			return True
 
 
 
 		elif io == "o":
 			if len(file_dir) == 0:
-				ValueError("file_dir not be confirmed")
+				raise ValueError("file_dir not be confirmed")
 
 			img = Image.fromarray(img.astype('uint8'), 'RGB')
 			if mode == "rgb":
@@ -541,11 +555,11 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 				img = img.convert("L")
 				img.save(file_dir)
 			else:
-				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+				raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
 			return True
 
 		else:
-			ValueError("io error, the io must be confirmed as 'i' for input, 'p' for presentation or 'o' for output")
+			raise ValueError("io error, the io must be confirmed as 'i' for input, 'p' for presentation or 'o' for output")
 
 
 
@@ -564,7 +578,7 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 				img = np.array(matplotlib.pyplot.imread(file_dir))
 				img = np.dot(img[...,:3], [0.299, 0.587, 0.144])
 			else:
-				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+				raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
 			return img
 
 
@@ -573,7 +587,7 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 			img = np.array(img)
 			img_size = len(np.shape(img))
 			if len(file_dir) == 0 and img_size != 2 and img_size != 3:
-				ValueError("It is necessary to confirmed the location of image or img array if you want to print image")
+				raise ValueError("It is necessary to confirmed the location of image or img array if you want to print image")
 			
 			if len(file_dir) != 0:
 				img = np.array(matplotlib.pyplot.imread(file_dir))
@@ -584,14 +598,14 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 				img = np.dot(img[...,:3], [0.299, 0.587, 0.144])
 				matplotlib.pyplot.imshow(img)
 			else:
-				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+				raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
 			return True
 
 
 
 		elif io == "o":
 			if len(file_dir) == 0:
-				ValueError("file_dir not be confirmed")
+				raise ValueError("file_dir not be confirmed")
 
 			img = Image.fromarray(img.astype('uint8'), 'RGB')
 			if mode == "rgb":
@@ -600,11 +614,11 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 				img = np.dot(img[...,:3], [0.299, 0.587, 0.144])
 				matplotlib.pyplot.savefig(img)
 			else:
-				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+				raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
 			return True
 
 		else:
-			ValueError("io error, the io must be confirmed as 'i' for input, 'p' for presentation or 'o' for output")
+			raise ValueError("io error, the io must be confirmed as 'i' for input, 'p' for presentation or 'o' for output")
 
 
 
@@ -626,20 +640,20 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 				img = np.array(imageio.imread(file_dir))
 				img = np.dot(img[...,:3], [0.299, 0.587, 0.144])
 			else:
-				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+				raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
 			return img
 
 
 
 		elif io == "p":
-			ValueError("mode error, imageio don't have image presentation system")
+			raise ValueError("mode error, imageio don't have image presentation system")
 			return True
 
 
 
 		elif io == "o":
 			if len(file_dir) == 0:
-				ValueError("file_dir not be confirmed")
+				raise ValueError("file_dir not be confirmed")
 
 			if mode == "rgb":
 				imageio.imwrite(file_dir, img)
@@ -647,14 +661,14 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
 				img = np.dot(img[...,:3], [0.299, 0.587, 0.144])
 				imageio.imwrite(file_dir, img)
 			else:
-				ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
+				raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
 			return True
 
 		else:
-			ValueError("io error, the io must be confirmed as 'i' for input, 'p' for presentation or 'o' for output")
+			raise ValueError("io error, the io must be confirmed as 'i' for input, 'p' for presentation or 'o' for output")
 
 	else:
-		ModuleNotFoundError("None image processing model has been found, you may need to install opencv, PIL, matplotlib or imageio")
+		raise ModuleNotFoundError("None image processing model has been found, you may need to install opencv, PIL, matplotlib or imageio")
 
 
 
