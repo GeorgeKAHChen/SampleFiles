@@ -1,40 +1,59 @@
-# Sample Files
-Here are some sample files for project.<br/>
+# Project Name
+intro of the project
 
-## Python_Init
-This program include some main algorithm which is useful in python program and image processing.<br/>
-
-### `Init.py`
-Include some basic fucntion of python program<br/>
-
-`LogWrite(LogStr, kind)`: This function will write the infomation into the log file.<br/>
-`BuildFile(FileName)`: This function will build a new file with FileName<br/>
-`BuildFolder(FolderName)`: This function will build a new folder with FileName<br/>
-`MoveFile(FileLocation, NewLocation, NewName)`: This function will copy files.<br/>
-	#Pay attention if the location is abs path or relative path<br/>
-	#This function also can be used as rename, as the usage of "mv" in bash.<br/>
-`StaClear()`: This function will clear the terminal (For Linux, MacOS) or command line (For Windows)<br/>
-`IntInput(Str, Min, Max, Method)`: This function will judge the input string.<br/>
-`GetTime()`: This function will return the time as a int<br/>
-`ArrOutput(Arr)`: This function will save the array as a table.<br/>
-`GetNextDay(Time, TimeAdd)`: This function will calculated the next day by the calendar<br/>
-`SystemJudge()`: This function will return the system infomation<br/>
+## Reference this project with paper
+[1]
 
 
-### `Pretreatment.py`
+## Usage
+### Install
+WARNING: THIS PROJECT IS UNIX ONLY!!
 
-### `InitAlgo.py`
+Download the project `git clone https://www.github.com/KazukiAmakawa/SampleFiles`
 
-## LaTeX
+* You may need to install 
 
-### `Chinese.tex`
 
-### `English.tex`
+### Easy Mode(For testing and training)
+Parameter Table
 
-### `Presentation.tex`
+---|---
+Usage
+---|---
+para1              | intro1
+---|---
+para2              | intro2
+---|---
 
-### `Sample.tex`
+### Full Mode (For rebuild model and developer and researcher)
+Change or using files to rebuild your own model for development and researching.
 
-## `ginignore`
+#### Kernel Files
+A
 
-## `Tool.sh`
+#### Other Files
+##### B
+
+##### C
+
+
+Source Code: https://www.github.com/KazukiAmakawa/SampleFiles-Class<br/>
+For more help, submit issue in this project or connect this E-mail: GeorgeKahChen@gmail.com
+
+## LICENSE
+Copyright (c) by KazukiAmakawa, all right reserved.<br/>
+GNU GENERAL PUBLIC LICENSE Version 3
+
+If you want to using this project as close source project, please connect us.
+
+
+## Note
+
+## Reference
+[1]
+
+
+Enjoy it! <br/>
+Kazuki Amakawa
+
+*THIS README.md ALSO BE A SAMPLE. DELETE THIS SETENCE BEFORE YOU USING THIS(ACTUTALLY TOLD TO MYSELF)
