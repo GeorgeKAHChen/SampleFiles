@@ -42,21 +42,18 @@ This function will return the current system, return "Dos" as windows or Dos, re
 
 ### GetSufixFile(dir_name, sufixSet)
 An excellent fucntion which will confirm the files with certain sufix.
-|-------------------|:------------------------------------------------:|
-|Usage                                                                 |
-|-------------------|:------------------------------------------------:|
-|dir_name           | The location you want to search                  |
-|-------------------|:------------------------------------------------:|
-|sufixSet           | An array of sufix strings which you want to search, e.g. ["png", "jpg", "avi"] |
-|-------------------|:------------------------------------------------:|
+|Usage|
+|---|:---|
+|dir_name         | The location you want to search|
+|sufixSet         | An array of sufix strings which you want to search, e.g. ["png", "jpg", "avi"]|
 
-|-------------------|:------------------------------------------------:|
-|Return (In order)                                                     |
-|-------------------|:------------------------------------------------:|
-|im_paths           | The location of goal files                       |
-|-------------------|:------------------------------------------------:|
-|im_name            | The name stirng(without sufix) of files          |
-|-------------------|:------------------------------------------------:|
+---|---
+Return (In order)
+---|---
+im_paths         | The location of goal files
+---|---
+im_name          | The name stirng(without sufix) of files
+---|---
 
 * WARNING: THIS FUNCTION STILL HAVE A LITTLE BUT. IT IS NECESSARY TO DETERMINE THAT THE GOAL HAVE NO FILE NAMED WITH ".", E.G. IF THERE IS A HIDDEN FILE IN THE GOAL FOLDER, THE PROJECT WILL SHUT DOWN DIRECTLY
 
