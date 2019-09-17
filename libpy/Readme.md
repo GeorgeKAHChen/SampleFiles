@@ -42,6 +42,7 @@ This function will return the current system, return "Dos" as windows or Dos, re
 
 ### GetSufixFile(dir_name, sufixSet)
 An excellent fucntion which will confirm the files with certain sufix.
+
 |Usage|
 |---|:---|
 |dir_name         | The location you want to search|
