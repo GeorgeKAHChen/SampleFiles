@@ -144,7 +144,7 @@ Figure/
 SaveArr*
 Saving/
 .gitignore
-.DS_Store
+*.DS_Store
 *.log
 *.m
 *.out
