@@ -148,3 +148,14 @@ Saving/
 *.log
 *.m
 *.out
+*.ps
+*.log
+*.aux
+*.out
+*.dvi
+*.bbl
+*.blg
+*.thm
+*.toc
+*.nav
+*.snm
