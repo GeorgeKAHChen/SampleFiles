@@ -161,7 +161,7 @@ def GetTime():
 
 def ArrOutput(Arr, Mode = 0):
     FileName = "SaveArr" + str(GetTime())
-    BuildFile(FileName)
+    #BuildFile(FileName)
     File = open(FileName, "a")
     Str = ""
     if Mode == 1:
@@ -710,4 +710,45 @@ def file_operation_function(command_list, server_route, client_route):
                 zip_ref.extractall(combo_command[2])
         except:
             pass
+
+
+
+
+def FileReadLine(line, mode = "str"):
+    """
+    mode = "int", "float", "str"
+    """
+    arr = []
+    element = ""
+    for i in range(0, len(line)):
+        if line[i] == " " or i + 1 == len(line):
+            if i + 1 == len(line) and line[i] != "\n":
+                element += line[i]
+            if len(element) == 0:
+                continue
+            if mode == "float":
+                try:
+                    element = float(element)
+                except:
+                    raise ValueError("Value in input file is not a float")
+            elif mode == "int":
+                try:
+                    element = int(element)
+                except:
+                    raise ValueError("Value in input file is not a int")
+            arr.append(element)
+            element = ""
+
+        else:
+            element += line[i]
+    return arr
+
+
+
+
+
+
+
+
+
 
