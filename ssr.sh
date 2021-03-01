@@ -81,10 +81,10 @@ $port \
     "password": "' \
 $passwd \
 '",
-    "method": "aes-128-ctr",
-    "protocol": "auth_aes128_md5",
+    "method": "aes-256-ctr",
+    "protocol": "auth_aes128_sha1",
     "protocol_param": "",
-    "obfs": "tls1.2_ticket_auth_compatible",
+    "obfs": "tls1.2_ticket_auth",
     "obfs_param": "",
     "speed_limit_per_con": 0,
     "speed_limit_per_user": 0,
@@ -99,7 +99,6 @@ $passwd \
     "fast_open": false
 }
 ' > user-config.json
-
 
 #Creative A Service
 sudo rm -rf /etc/systemd/system/shadowsocksr.service
@@ -137,7 +136,7 @@ sudo ss -tulpn | grep 80
 
 
 #Get IP
-ifconfig | grep Bcast > tmpoutput
+ifconfig | grep broadcast > tmpoutput
 list=$(cat tmpoutput)
 
 declare -a arr
@@ -178,10 +177,10 @@ $loc_port \
     "password": "' \
 $passwd \
 '",
-    "method": "aes-128-ctr",
-    "protocol": "auth_aes128_md5",
+    "method": "aes-256-ctr",
+    "protocol": "auth_aes128_sha1",
     "protocol_param": "",
-    "obfs": "tls1.2_ticket_auth_compatible",
+    "obfs": "tls1.2_ticket_auth",
     "obfs_param": "",
     "speed_limit_per_con": 0,
     "speed_limit_per_user": 0,
