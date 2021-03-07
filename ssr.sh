@@ -194,8 +194,44 @@ $passwd \
     "redirect": "",
     "fast_open": false
 }
+//config file end
+' > /home/output-conf.json
+
+printf '%s%s%s%s%s%s%s%s%s' '{
+    "server": "'\
+$ip \
+'",
+    "server_ipv6": "::",
+    "server_port": '\
+$port \
+',
+    "local_address": "127.0.0.1",
+    "local_port": '\
+$loc_port \
+',
+
+    "password": "' \
+$passwd \
+'",
+    "method": "aes-256-ctr",
+    "protocol": "auth_aes128_sha1",
+    "protocol_param": "",
+    "obfs": "tls1.2_ticket_auth",
+    "obfs_param": "",
+    "speed_limit_per_con": 0,
+    "speed_limit_per_user": 0,
+
+    "additional_ports" : {}, 
+    "additional_ports_only" : false,
+    "timeout": 120,
+    "udp_timeout": 60,
+    "dns_ipv6": false,
+    "connect_verbose_info": 0,
+    "redirect": "",
+    "fast_open": false
+}
+//config file end
 '
-echo "//config file end"
 
 
 
