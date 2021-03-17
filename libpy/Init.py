@@ -159,10 +159,7 @@ def GetTime():
     return ReturnTime
 
 
-def ArrOutput(Arr, Mode = 0):
-    FileName = "SaveArr" + str(GetTime())
-    #BuildFile(FileName)
-    File = open(FileName, "a")
+def ArrOutput(Arr, Mode = 0, Save_File = True):
     Str = ""
     if Mode == 1:
         Str += "[["
@@ -180,8 +177,14 @@ def ArrOutput(Arr, Mode = 0):
                 Str += "], ["
             else:
                 Str += "]]"
-    File.write(Str)
-    File.close()
+
+    if Save_File:
+        FileName = "SaveArr" + str(GetTime())
+        File = open(FileName, "a")
+        File.write(Str)
+        File.close()
+    return Str
+
 
 
 def GetNextDay(Time, TimeAdd):
