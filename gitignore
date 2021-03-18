@@ -140,7 +140,6 @@ venv.bak/
 #MyFile 
 Output/
 Input/
-Figure/
 SaveArr*
 Saving/
 .gitignore
@@ -148,6 +147,8 @@ Saving/
 *.log
 *.m
 *.out
+*__pycache__*
+*Output*
 *.ps
 *.log
 *.aux
