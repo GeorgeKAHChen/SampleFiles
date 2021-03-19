@@ -448,11 +448,16 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
             if len(file_dir) == 0:
                 raise ValueError("file_dir not be confirmed")
 
-            img = Image.fromarray(img.astype('uint8'), 'RGB')
+            
             if mode == "rgb":
+                img = Image.fromarray(img.astype('uint8'), 'RGB')
                 img.save(file_dir)
             elif mode == "grey":
-                img = img.convert("L")
+                if len(img[0]) == 3:
+                    img = Image.fromarray(img.astype('uint8'), 'RGB')
+                    img = img.convert("L")
+                else:
+                    img = Image.fromarray(img.astype('uint8'))
                 img.save(file_dir)
             else:
                 raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
