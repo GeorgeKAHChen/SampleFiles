@@ -614,10 +614,16 @@ def read_json(filename):
     file = open(filename, "r", encoding="utf-8")
     str_json = ""
     while 1:
-        line =file.readline()
+        line = file.readline()
         if not line:
             break 
-        str_json += line[0:-1]
+        maxx = len(line) - 1
+        for i in range(1, len(line)):
+            if line[i] == "/" and line[i-1] == "/":
+                maxx = i-2
+        line = line[0: maxx]
+        print(line)
+        str_json += line
 
     return json.loads(str_json)
 
