@@ -609,20 +609,32 @@ def error_warning(warning_info):
 
 
 
-def read_json(filename):
-    import json
-    file = open(filename, "r", encoding="utf-8")
+def read_json(filename = "", input_string = ""):
+    if len(filename) == 0 and len(input_string) == 0:
+        print("Json input error, the input should be a file or a string of json")
+        return ""
+
     str_json = ""
-    while 1:
-        line = file.readline()
-        if not line:
-            break 
-        maxx = len(line) - 1
-        for i in range(1, len(line)):
-            if line[i] == "/" and line[i-1] == "/":
-                maxx = i-2
-        line = line[0: maxx]
-        str_json += line
+    if len(input_string) == 0:
+        import json
+        file = open(filename, "r", encoding="utf-8")
+
+        while 1:
+            line = file.readline()
+            if not line:
+                break 
+            maxx = len(line) - 1
+            for i in range(1, len(line)):
+                if line[i] == "/" and line[i-1] == "/":
+                    maxx = i-2
+            line = line[0: maxx]
+            str_json += line
+    else:
+        for i in range(0, len(input_string)):
+            if input_string[i] == "\n":
+                continue
+            else:
+                str_json += input_string[i]
 
     return json.loads(str_json)
 
