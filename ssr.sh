@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# sudo apt update && sudo apt upgrade -y
+# sudo apt install net-tools wget zip unzip python-m2crypto libsodium23 git apache2 openssl -y
+
 #==========================================================
 #CONFIG AREA
 mkdir /home/shadowsocksr
@@ -34,9 +38,6 @@ mkdir $location
 
 echo "============Install tools, SSR and Cover============"
 #Normal package install 
-sudo apt update && sudo apt upgrade -y
-sudo apt install wget zip unzip python-m2crypto libsodium23 git apache2 openssl -y
-
 cd $location
 
 #SSR download
@@ -230,7 +231,7 @@ $passwd \
     "redirect": "",
     "fast_open": false
 }
-//config file end
+//
 '
 
 
