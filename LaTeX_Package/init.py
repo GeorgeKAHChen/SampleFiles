@@ -1,8 +1,22 @@
 #latex auto compile
 #By Kazuki Amakawa
 #Initial
+
+def SystemJudge():
+    import platform  
+    Str = platform.system() 
+    if Str[0] == "w" or Str[0] == "W":
+        return "Dos"
+    elif Str == "Darwin": 
+        return "Darwin"
+    else:
+        return "Linux"
+
+
 def main():
     import os
+    import time 
+
     os.system("clear")
     os.system("clear")
     para1 = ""
@@ -45,60 +59,48 @@ def main():
         cmd = "rm -rf " + files[i]
         os.system(cmd)
     os.system("rm -rf makefile")
+    os.system("mv *.tex main.tex")
 
-    string = ""
-    string += "#Auto Latex Compile\n"
-    string += "#Copyright by Kazuki Amakawa\n"
-    string += "\n"
-    string += "filename=" + filename + "\n"
-    string += "main:\n"
-    if para1 == "zh" or para1 == "jp":
-        string += "\txelatex ${filename}.tex\n"
-        string += "\txelatex ${filename}.tex\n"
-        string += "\txelatex ${filename}.tex\n"
-        string += "\trm -rf ${filename}.{ps,log,aux,out,dvi,bbl,blg,thm,toc,nav,snm}\n"
-        string += "\topen ${filename}.pdf\n"
-    elif para1 == "en":
-        string += "\tlatex ${filename}.tex\n"
-        string += "\tlatex ${filename}.tex\n"
-        string += "\tlatex ${filename}.tex\n"
-        string += "\trm -rf ${filename}.{ps,log,aux,out,dvi,bbl,blg,thm,toc,nav,snm}\n"
-        string += "\topen ${filename}.pdf\n"
-    string += "\n"
-    string += "ref:\n"
-    if para1 == "zh" or para1 == "jp":
-        string += "\txelatex ${filename}.tex\n"
-        string += "\tbibtex ${filename}.aux\n"
-        string += "\txelatex ${filename}.tex\n"
-        string += "\txelatex ${filename}.tex\n"
-        string += "\trm -rf ${filename}.{ps,log,aux,out,dvi,bbl,blg,thm,toc,nav,snm}\n"
-        string += "\topen ${filename}.pdf\n"
-    elif para1 == "en":
-        string += "\tlatex ${filename}.tex\n"
-        string += "\tbibtex ${filename}.aux\n"
-        string += "\tlatex ${filename}.tex\n"
-        string += "\tlatex ${filename}.tex\n"
-        string += "\trm -rf ${filename}.{ps,log,aux,out,dvi,bbl,blg,thm,toc,nav,snm}\n"
-        string += "\topen ${filename}.pdf\n"
-    string += "\n"
-    string += "e:\n"
-    if para1 == "zh" or para1 == "jp":
-        string += "\txelatex ${filename}.tex\n"
-        string += "\trm -rf ${filename}.{ps,log,aux,out,dvi,bbl,blg,thm,toc,nav,snm}\n"
-        string += "\topen ${filename}.pdf\n"
-    elif para1 == "en":
-        string += "\tlatex ${filename}.tex\n"
-        string += "\trm -rf ${filename}.{ps,log,aux,out,dvi,bbl,blg,thm,toc,nav,snm}\n"
-        string += "\topen ${filename}.pdf\n"
-    string += "\n"
+    curr_sys = SystemJudge()
+    String = ""
+    
+    FileName = "makefile_pre"
+    File = open(FileName, "r")
+    FileLine = File.readline()
+    String += FileLine
+    val_line = 1
+    while 1:
+        FileLine = File.readline()
+        if not FileLine:
+            break
 
-    string += "clear:\n"
-    string += "\trm -rf ${filename}.pdf\n"
+        val_line += 1
+        if val_line == 3 or val_line == 4 or val_line == 5:
+            if curr_sys == "Dos":
+                if val_line == 4 or val_line == 5:
+                    FileLine = "#" + FileLine
+            if curr_sys == "Linux":
+                if val_line == 3 or val_line == 5:
+                    FileLine = "#" + FileLine
+            if curr_sys == "Darwin":
+                if val_line == 3 or val_line == 4:
+                    FileLine = "#" + FileLine
+        String += FileLine
+
+    File.close()
+    os.system("rm -rf makefile_pre")
+
+    time.sleep(1)
 
     FileName = "makefile"
     File = open(FileName, "w")
-    File.write(string)
+    File.write(String)
     File.close()
+
+
+
+
+
     os.system("clear")
     os.system("rm -rf init.py")
     print("Latex initial finished")

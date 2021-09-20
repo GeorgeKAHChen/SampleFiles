@@ -1,0 +1,92 @@
+#Auto Latex Compile
+#Copyright by Kazuki Amakawa
+open=explorer.exe   # WSL
+open=xdg-open       # Linux
+open=open           # MacOS
+
+filename=main
+
+main: clear
+	xelatex ${filename}.tex
+	xelatex ${filename}.tex
+	xelatex ${filename}.tex
+	rm -rf ${filename}.ps
+	rm -rf ${filename}.log
+	rm -rf ${filename}.aux
+	rm -rf ${filename}.out
+	rm -rf ${filename}.dvi
+	rm -rf ${filename}.bbl
+	rm -rf ${filename}.blg
+	rm -rf ${filename}.thm
+	rm -rf ${filename}.toc
+	rm -rf ${filename}.nav
+	rm -rf ${filename}.snm
+	${open} ${filename}.pdf
+
+init: clear
+	${open} ./
+	${open} "${filename}.tex"
+	xelatex ${filename}.tex
+	xelatex ${filename}.tex
+	xelatex ${filename}.tex
+	rm -rf ${filename}.ps
+	rm -rf ${filename}.log
+	rm -rf ${filename}.aux
+	rm -rf ${filename}.out
+	rm -rf ${filename}.dvi
+	rm -rf ${filename}.bbl
+	rm -rf ${filename}.blg
+	rm -rf ${filename}.thm
+	rm -rf ${filename}.toc
+	rm -rf ${filename}.nav
+	rm -rf ${filename}.snm
+	${open} ${filename}.pdf
+
+
+ref: clear
+	xelatex ${filename}.tex
+	bibtex ${filename}.aux
+	xelatex ${filename}.tex
+	xelatex ${filename}.tex
+	rm -rf ${filename}.ps
+	rm -rf ${filename}.log
+	rm -rf ${filename}.aux
+	rm -rf ${filename}.out
+	rm -rf ${filename}.dvi
+	rm -rf ${filename}.bbl
+	rm -rf ${filename}.blg
+	rm -rf ${filename}.thm
+	rm -rf ${filename}.toc
+	rm -rf ${filename}.nav
+	rm -rf ${filename}.snm
+	${open} ${filename}.pdf
+
+e: clear
+	xelatex ${filename}.tex
+	rm -rf ${filename}.ps
+	rm -rf ${filename}.log
+	rm -rf ${filename}.aux
+	rm -rf ${filename}.out
+	rm -rf ${filename}.dvi
+	rm -rf ${filename}.bbl
+	rm -rf ${filename}.blg
+	rm -rf ${filename}.thm
+	rm -rf ${filename}.toc
+	rm -rf ${filename}.nav
+	rm -rf ${filename}.snm
+	${open} ${filename}.pdf
+
+clear:
+	rm -rf ${filename}.pdf
+	rm -rf ${filename}.ps
+	rm -rf ${filename}.log
+	rm -rf ${filename}.aux
+	rm -rf ${filename}.out
+	rm -rf ${filename}.dvi
+	rm -rf ${filename}.bbl
+	rm -rf ${filename}.blg
+	rm -rf ${filename}.thm
+	rm -rf ${filename}.toc
+	rm -rf ${filename}.nav
+	rm -rf ${filename}.snm
+
