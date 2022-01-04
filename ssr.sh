@@ -195,7 +195,7 @@ $passwd \
     "redirect": "",
     "fast_open": false
 }
-//config file end
+//
 ' > /home/output-conf.json
 
 printf '%s%s%s%s%s%s%s%s%s' '{
@@ -234,20 +234,4 @@ $passwd \
 //
 '
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ufw allow $port
