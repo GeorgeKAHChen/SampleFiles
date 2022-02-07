@@ -42,16 +42,10 @@ def main():
     if para1 == "en" and para2 == "n":
         files[1] = ""
         filename = "English"
-    if para1 == "jp" and para2 == "n":
-        files[2] = ""
-        filename = "Japanese"
     if para1 == "zh" and para2 == "p":
         files[3] = ""
         filename = "Presentation"
     if para1 == "en" and para2 == "p":
-        files[3] = ""
-        filename = "Presentation"
-    if para1 == "jp" and para2 == "p":
         files[3] = ""
         filename = "Presentation"
 

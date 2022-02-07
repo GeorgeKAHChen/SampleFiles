@@ -1,4 +1,29 @@
+location="/home/v2ray"
+loc_port=1070
+
+cd $location
+
+# Install snapd
+sudo apt update
+sudo apt install nginx -y
+sudo apt install snapd -y
+sudo snap install core; sudo snap refresh core
+sudo apt-get remove certbot
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo snap set certbot trust-plugin-with-root=ok
+sudo snap install certbot-dns-cloudflare
 git clone https://github.com/v2fly/fhs-install-v2ray
+git clone https://github.com/arcdetri/sample-blog
+
+sudo certbot renew --dry-run
+
+sudo ufw allow 'Nginx HTTP'
+
+systemctl enable nginx
+systemctl start nginx
+
+
 bash ./fhs-install-v2ray/install-release.sh 
 systemctl enable v2ray
 
@@ -18,22 +43,17 @@ printf '
             "settings": {
                 "clients": [
                     {
-                        "id": "'
-\$uuid
-'", 
+                        "id": "' \
+$uuid \
+'",
                         "level": 0,
-                        "email": "love@v2fly.org"
+                        "email": "kazukiamakawa@gmail.com"
                     }
                 ],
                 "decryption": "none",
                 "fallbacks": [
                     {
                         "dest": 80
-                    },
-                    {
-                        "path": "/websocket", // 必须换成自定义的 PATH
-                        "dest": 1234,
-                        "xver": 1
                     }
                 ]
             },
@@ -52,29 +72,6 @@ printf '
                     ]
                 }
             }
-        },
-        {
-            "port": 1234,
-            "listen": "127.0.0.1",
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "", // 填写你的 UUID
-                        "level": 0,
-                        "email": "love@v2fly.org"
-                    }
-                ],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "ws",
-                "security": "none",
-                "wsSettings": {
-                    "acceptProxyProtocol": true, // 提醒：若你用 Nginx/Caddy 等反代 WS，需要删掉这行
-                    "path": "/websocket" // 必须换成自定义的 PATH，需要和上面的一致
-                }
-            }
         }
     ],
     "outbounds": [
@@ -84,6 +81,49 @@ printf '
     ]
 }
 '
-/usr/local/etc/v2ray/config.json
+> /usr/local/etc/v2ray/config.json
 
+printf '
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "port": 1090,
+            "listen": "127.0.0.1",
+            "protocol": "socks",
+            "settings": {
+                "udp": true
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "www.stlaplace.com",
+                        "port": 443,
+                        "users": [
+                            {
+                                "id": "' \
+$uuid \
+'",
+                                "encryption": "none",
+                                "level": 0
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "tls"
+            }
+        }
+    ]
+}
+'
 systemctl start v2ray
