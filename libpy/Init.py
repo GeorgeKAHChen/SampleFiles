@@ -745,32 +745,33 @@ def FileReadLine(line, mode = "str"):
     """
     arr = []
     element = ""
-    for i in range(0, len(line)):
-        if line[i] == " " or i + 1 == len(line):
-            if i + 1 == len(line) and line[i] != "\n":
-                element += line[i]
-            if len(element) == 0:
-                continue
+
+    line_arr = line.split(" ")
+    for i in range(0, len(line_arr)):
+        if len(line_arr[i]) == 0:
+            continue
+        else:
             if mode == "float":
                 try:
-                    element = float(element)
+                    arr.append(float(line_arr[i]))
                 except:
                     raise ValueError("Value in input file is not a float")
             elif mode == "int":
                 try:
-                    element = int(element)
+                    arr.append(int(line_arr[i]))
                 except:
                     raise ValueError("Value in input file is not a int")
-            arr.append(element)
-            element = ""
+            else:
+                arr.append(line_arr[i])
 
-        else:
-            element += line[i]
     return arr
 
+"""
+For test 
 
-
-
+if __name__ == '__main__':
+    pass
+"""
 
 
 
