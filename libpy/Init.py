@@ -395,11 +395,12 @@ def ImageIO(file_dir = "", img = [], io = "i", mode = "rgb", backend = ""):
                 raise ValueError("file_dir not be confirmed")
 
             if mode == "rgb":
-                cv2.imwrite(file_dir, img, cv2.IMREAD_UNCHANGED)
+                #cv2.imwrite(file_dir, img, cv2.IMREAD_UNCHANGED)
+                cv2.imwrite(file_dir, cv2.cvtColor(np.array(img, dtype = np.uint8), cv2.COLOR_RGB2BGR))
             elif mode == "grey":
                 if len(np.shape(img)) == 3:
-                    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                cv2.imwrite(file_dir, img)
+                    img = cv2.cvtColor(np.array(img, dtype = np.uint8), cv2.COLOR_BGR2GRAY)
+                cv2.imwrite(file_dir, np.float32(img))
             else:
                 raise ValueError("mode error, the image mode must be confirmed as 'grey' for mono or 'rgp' for rgb image")
             return True
