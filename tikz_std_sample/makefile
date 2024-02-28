@@ -7,13 +7,11 @@ open=open           # MacOS
 filename=main
 
 main: clear
-	latex --jobname=${filename} ${filename}.tex
-	dvips -o ${filename}.eps ${filename}.dvi
+	xelatex --jobname=${filename} ${filename}.tex
 	rm -rf ${filename}.ps
 	rm -rf ${filename}.log
 	rm -rf ${filename}.aux
 	rm -rf ${filename}.out
-	rm -rf ${filename}.dvi
 	rm -rf ${filename}.bbl
 	rm -rf ${filename}.blg
 	rm -rf ${filename}.thm
@@ -25,7 +23,7 @@ f:full
 	echo "f = full"
 	
 full: main
-	open ${filename}.eps
+	open ${filename}.pdf
 
 clear:
 	rm -rf ${filename}.pdf
