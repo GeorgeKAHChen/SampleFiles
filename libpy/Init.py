@@ -238,6 +238,7 @@ def GetSufixFile(dir_name, sufixSet):
     import os
     im_paths = []
     im_name = []
+    im_sufix = []
     for parent, dirs, files in os.walk(dir_name):
         for file in files:
             #print(file)
@@ -247,6 +248,7 @@ def GetSufixFile(dir_name, sufixSet):
                 name += part_name[i]
                 if i+1 < len(part_name) - 1:
                     name += "."
+                print(name)
             sufix = part_name[len(part_name) - 1]
             im_path = ""
             if sufix in sufixSet:
@@ -254,8 +256,9 @@ def GetSufixFile(dir_name, sufixSet):
             if os.path.exists(im_path):
                 im_paths.append(im_path)
                 im_name.append(name)
-
-    return im_paths, im_name
+                im_sufix.append(sufix)
+                
+    return im_paths, im_name, im_sufix
 
 
 def RGBList2Table(InputImage):
