@@ -638,6 +638,7 @@ def read_json(filename = "", input_string = ""):
             for i in range(1, len(line)):
                 if line[i] == "/" and line[i-1] == "/":
                     maxx = i-2
+                    break
             line = line[0: maxx]
             str_json += line
     else:
